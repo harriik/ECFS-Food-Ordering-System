@@ -6,6 +6,7 @@ import CartPage from './pages/CartPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import OrderTrackPage from './pages/OrderTrackPage.jsx';
+import MyOrdersPage from './pages/MyOrdersPage.jsx';
 import AdminMenuPage from './pages/admin/AdminMenuPage.jsx';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -33,6 +34,11 @@ function App() {
             <Route path="/track/:orderId" element={
               <ProtectedRoute>
                 <OrderTrackPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/orders" element={
+              <ProtectedRoute>
+                <MyOrdersPage />
               </ProtectedRoute>
             } />
 

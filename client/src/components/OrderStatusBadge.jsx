@@ -7,6 +7,7 @@ const OrderStatusBadge = ({ status }) => {
       case 'preparing': return 'badge-preparing';
       case 'ready': return 'badge-ready';
       case 'delivered': return 'badge-delivered';
+      case 'cancelled': return 'badge-cancelled';
       default: return '';
     }
   };
@@ -17,6 +18,7 @@ const OrderStatusBadge = ({ status }) => {
       case 'preparing': return 'PREPARING';
       case 'ready': return 'READY FOR PICKUP';
       case 'delivered': return 'DELIVERED';
+      case 'cancelled': return 'CANCELLED';
       default: return s.toUpperCase();
     }
   };

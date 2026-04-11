@@ -112,7 +112,7 @@ router.patch('/:id/status', protect, admin, async (req, res) => {
     const { status } = req.body;
     
     // Status progression rule
-    const validStatuses = ['placed', 'preparing', 'ready', 'delivered'];
+    const validStatuses = ['placed', 'preparing', 'ready', 'delivered', 'cancelled'];
     if (!validStatuses.includes(status)) {
       return res.status(400).json({ message: 'Invalid status' });
     }
@@ -124,11 +124,39 @@ router.patch('/:id/status', protect, admin, async (req, res) => {
     }
 
     order.status = status;
+    if (status === 'cancelled') {
+      order.cancelledBy = 'admin';
+    }
     const updatedOrder = await order.save();
 
     res.json(updatedOrder);
   } catch (error) {
     res.status(500).json({ message: 'Failed to update order status' });
+  }
+});
+
+// PATCH /api/orders/:id/cancel
+// Customer cancels their own order
+router.patch('/:id/cancel', protect, async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) return res.status(404).json({ message: 'Order not found' });
+    
+    // verify ownership
+    if (order.userId.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Unauthorized' });
+    }
+    
+    if (order.status !== 'placed') {
+      return res.status(400).json({ message: 'Order can only be cancelled while placed' });
+    }
+    
+    order.status = 'cancelled';
+    order.cancelledBy = 'user';
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } catch (err) {
+    res.status(500).json({ message: 'Error cancelling order' });
   }
 });
 

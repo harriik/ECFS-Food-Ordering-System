@@ -30,8 +30,12 @@ const orderSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['placed', 'preparing', 'ready', 'delivered'],
+    enum: ['placed', 'preparing', 'ready', 'delivered', 'cancelled'],
     default: 'placed'
+  },
+  cancelledBy: {
+    type: String,
+    enum: ['user', 'admin']
   }
 }, { timestamps: true });
 
@@ -41,7 +45,8 @@ orderSchema.methods.statusLabel = function() {
     'placed': 'Order Placed',
     'preparing': 'Preparing',
     'ready': 'Ready for Pickup/Delivery',
-    'delivered': 'Delivered'
+    'delivered': 'Delivered',
+    'cancelled': 'Cancelled'
   };
   return map[this.status] || this.status;
 };

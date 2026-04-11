@@ -17,15 +17,22 @@ const Navbar = () => {
 
   return (
     <header className="navbar">
-      <Link to="/menu" className="nav-brand">Gourmet🍔</Link>
+      <Link to={userInfo?.role === 'admin' ? "/admin/orders" : "/menu"} className="nav-brand">Hidden Fork</Link>
       <nav className="nav-links">
-        <Link to="/menu" className="nav-link">Menu</Link>
-        <Link to="/cart" className="nav-link">
-          Cart {totalItems > 0 && <span style={{ background: 'var(--accent-color)', color: 'white', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem', marginLeft: '4px' }}>{totalItems}</span>}
-        </Link>
+        {(!userInfo || userInfo.role !== 'admin') && (
+          <>
+            <Link to="/menu" className="nav-link">Menu</Link>
+            <Link to="/cart" className="nav-link">
+              Cart {totalItems > 0 && <span style={{ background: 'var(--accent-color)', color: 'white', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem', marginLeft: '4px' }}>{totalItems}</span>}
+            </Link>
+          </>
+        )}
         
         {userInfo ? (
           <>
+            {userInfo.role !== 'admin' && (
+              <Link to="/orders" className="nav-link">My Orders</Link>
+            )}
             {userInfo.role === 'admin' && (
               <>
                 <Link to="/admin/menu" className="nav-link" style={{ color: 'var(--status-preparing)' }}>Admin Menu</Link>

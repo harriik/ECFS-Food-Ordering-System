@@ -34,8 +34,8 @@ const AdminOrdersPage = () => {
   };
 
   const getNextStatusOptions = (current) => {
-    if (current === 'placed') return [{ label: 'Accept & Prepare', val: 'preparing' }];
-    if (current === 'preparing') return [{ label: 'Mark Ready', val: 'ready' }];
+    if (current === 'placed') return [{ label: 'Accept & Prepare', val: 'preparing' }, { label: 'Cancel', val: 'cancelled' }];
+    if (current === 'preparing') return [{ label: 'Mark Ready', val: 'ready' }, { label: 'Cancel', val: 'cancelled' }];
     if (current === 'ready') return [{ label: 'Complete Delivery', val: 'delivered' }];
     return [];
   };
@@ -68,7 +68,7 @@ const AdminOrdersPage = () => {
 
               <div style={{ textAlign: 'right' }}>
                 <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--accent-color)', marginBottom: '1rem' }}>
-                  ${order.total.toFixed(2)}
+                  ₹{order.total.toFixed(2)}
                 </div>
                 
                 <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>

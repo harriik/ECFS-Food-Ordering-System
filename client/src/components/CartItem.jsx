@@ -11,7 +11,7 @@ const CartItem = ({ data }) => {
     <div className="cart-item">
       <div style={{ flex: 2 }}>
         <h3 style={{ fontSize: '1.1rem' }}>{data.menuItem.name}</h3>
-        <p style={{ fontSize: '0.9rem' }}>${data.priceAtOrder.toFixed(2)} each</p>
+        <p style={{ fontSize: '0.9rem' }}>₹{data.priceAtOrder.toFixed(2)} each</p>
       </div>
       
       <div className="qty-controls" style={{ margin: '0 1rem' }}>
@@ -21,7 +21,7 @@ const CartItem = ({ data }) => {
       </div>
       
       <div style={{ flex: 1, textAlign: 'right', fontWeight: 'bold' }}>
-        ${(data.priceAtOrder * data.quantity).toFixed(2)}
+        ₹{(data.priceAtOrder * data.quantity).toFixed(2)}
       </div>
       
       <button 

@@ -6,7 +6,7 @@ const MenuItemCard = ({ item }) => {
   
   const cartItem = items.find(i => i.menuItem._id === item._id);
 
-  const displayPrice = `$${item.price.toFixed(2)}`;
+  const displayPrice = `₹${item.price.toFixed(2)}`;
 
   return (
     <div className="menu-card">

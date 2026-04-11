@@ -61,7 +61,7 @@ const CartPage = () => {
             
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
               <span>Items ({totalItems})</span>
-              <span>${totalPrice.toFixed(2)}</span>
+              <span>₹{totalPrice.toFixed(2)}</span>
             </div>
             
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
@@ -71,7 +71,7 @@ const CartPage = () => {
 
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '2rem', borderTop: '1px solid var(--border-color)', paddingTop: '1rem' }}>
               <span>Total</span>
-              <span style={{ color: 'var(--accent-color)' }}>${totalPrice.toFixed(2)}</span>
+              <span style={{ color: 'var(--accent-color)' }}>₹{totalPrice.toFixed(2)}</span>
             </div>
 
             <button 
