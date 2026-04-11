@@ -28,6 +28,7 @@ instance.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       localStorage.removeItem('userInfo');
       if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+        window.alert("Session timeout. Please login again.");
         window.location.href = '/login';
       }
     }
