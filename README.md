@@ -1,4 +1,4 @@
-# Hidden Fork - Food Ordering App Using Frontend:React,Backend:javascript
+# Hidden Fork - Food Ordering App 
 
 A modern, high-performance Food Ordering Web Application (Swiggy/Zomato clone) built from scratch.
 
