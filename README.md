@@ -3,7 +3,7 @@
 A modern, high-performance Food Ordering Web Application (Swiggy/Zomato clone) built from scratch.
 
 ## Project Architecture
-- **Frontend App**: React (Vite), React Router v6, Context API, Vanilla CSS (rich aesthetics).
+- **Frontend App**: React (Vite), React Router v6, Context API, Vanilla CSS.
 - **Backend App**: Node.js, Express, MongoDB, Mongoose, JWT authentication.
 
 ## Prerequisites
