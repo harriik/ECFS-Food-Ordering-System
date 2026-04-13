@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5000/api', // default local port
+  baseURL: 'https://ecfs-food-ordering-system.onrender.com/api', // default local port
 });
 
 // Add a request interceptor to attach JWT
