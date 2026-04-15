@@ -5,16 +5,13 @@ import { admin } from '../middleware/adminMiddleware.js';
 
 const router = express.Router();
 
-// GET /api/menu
-// Get all available items, optionally filter by category/search
-// Admin gets all including unavailable (if logged in and admin)
+
 router.get('/', async (req, res) => {
   try {
     const { category, search, all } = req.query;
     
     let query = {};
     
-    // Check if we want only available items (default for customers)
     if (all !== 'true') {
       query.available = true;
     }
@@ -34,7 +31,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// POST /api/menu (admin only)
 router.post('/', protect, admin, async (req, res) => {
   try {
     const { name, price, description, category, imageUrl, available } = req.body;
@@ -55,7 +51,6 @@ router.post('/', protect, admin, async (req, res) => {
   }
 });
 
-// PUT /api/menu/:id (admin only)
 router.put('/:id', protect, admin, async (req, res) => {
   try {
     const { name, price, description, category, imageUrl, available } = req.body;
@@ -80,7 +75,6 @@ router.put('/:id', protect, admin, async (req, res) => {
   }
 });
 
-// DELETE /api/menu/:id (admin only)
 router.delete('/:id', protect, admin, async (req, res) => {
   try {
     const item = await MenuItem.findByIdAndDelete(req.params.id);
