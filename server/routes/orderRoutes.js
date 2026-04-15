@@ -6,8 +6,6 @@ import { admin } from '../middleware/adminMiddleware.js';
 
 const router = express.Router();
 
-// POST /api/orders
-// Place a new order
 router.post('/', protect, async (req, res) => {
   try {
     const { items } = req.body;
@@ -16,7 +14,6 @@ router.post('/', protect, async (req, res) => {
       return res.status(400).json({ message: 'No order items' });
     }
 
-    // Verify items exist and are available, and calculate total securely on server
     let total = 0;
     const orderItems = [];
 
@@ -44,7 +41,7 @@ router.post('/', protect, async (req, res) => {
     const order = new Order({
       userId: req.user._id,
       items: orderItems,
-      total: Number(total.toFixed(2)) // to avoid weird float issues
+      total: Number(total.toFixed(2)) 
     });
 
     const savedOrder = await order.save();
@@ -54,8 +51,6 @@ router.post('/', protect, async (req, res) => {
   }
 });
 
-// GET /api/orders/mine
-// Get logged-in user's orders
 router.get('/mine', protect, async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.user._id })
@@ -67,8 +62,6 @@ router.get('/mine', protect, async (req, res) => {
   }
 });
 
-// GET /api/orders/:id
-// Get order by ID (owner or admin)
 router.get('/:id', protect, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id)
@@ -79,7 +72,6 @@ router.get('/:id', protect, async (req, res) => {
       return res.status(404).json({ message: 'Order not found' });
     }
 
-    // restrict to admin or owner
     if (order.userId._id.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
       return res.status(403).json({ message: 'Not authorized to view this order' });
     }
@@ -90,8 +82,6 @@ router.get('/:id', protect, async (req, res) => {
   }
 });
 
-// GET /api/orders
-// Get all orders (admin only)
 router.get('/', protect, admin, async (req, res) => {
   try {
     const orders = await Order.find()
@@ -105,13 +95,10 @@ router.get('/', protect, admin, async (req, res) => {
   }
 });
 
-// PATCH /api/orders/:id/status
-// Update order status (admin only)
 router.patch('/:id/status', protect, admin, async (req, res) => {
   try {
     const { status } = req.body;
     
-    // Status progression rule
     const validStatuses = ['placed', 'preparing', 'ready', 'delivered', 'cancelled'];
     if (!validStatuses.includes(status)) {
       return res.status(400).json({ message: 'Invalid status' });
@@ -135,14 +122,12 @@ router.patch('/:id/status', protect, admin, async (req, res) => {
   }
 });
 
-// PATCH /api/orders/:id/cancel
-// Customer cancels their own order
+
 router.patch('/:id/cancel', protect, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
     if (!order) return res.status(404).json({ message: 'Order not found' });
     
-    // verify ownership
     if (order.userId.toString() !== req.user._id.toString()) {
       return res.status(403).json({ message: 'Unauthorized' });
     }
