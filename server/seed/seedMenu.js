@@ -5,7 +5,6 @@ import MenuItem from '../models/MenuItem.js';
 dotenv.config();
 
 const sampleItems = [
-  // Starters
   {
     name: "Crispy Spring Rolls",
     price: 199,
@@ -31,7 +30,6 @@ const sampleItems = [
     available: false // Sold out demo
   },
   
-  // Mains
   {
     name: "Classic Cheeseburger",
     price: 399,
@@ -65,7 +63,6 @@ const sampleItems = [
     available: true
   },
 
-  // Desserts
   {
     name: "Chocolate Lava Cake",
     price: 229,
@@ -83,7 +80,6 @@ const sampleItems = [
     available: true
   },
   
-  // Drinks
   {
     name: "Mango Smoothie",
     price: 149,
@@ -115,7 +111,6 @@ const seedDB = async () => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log('DB Connected for seeding...');
     
-    // Clear existing data out
     await MenuItem.deleteMany();
     console.log('Old menu items cleared.');
 
