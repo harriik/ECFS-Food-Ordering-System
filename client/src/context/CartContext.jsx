@@ -3,13 +3,11 @@ import React, { createContext, useState, useEffect } from 'react';
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  // Try to load cart from session storage on start
   const [items, setItems] = useState(() => {
     const saved = sessionStorage.getItem('cartItems');
     return saved ? JSON.parse(saved) : [];
   });
 
-  // Keep sessionStorage in sync
   useEffect(() => {
     sessionStorage.setItem('cartItems', JSON.stringify(items));
   }, [items]);
