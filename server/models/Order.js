@@ -39,7 +39,6 @@ const orderSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-// method to get status label
 orderSchema.methods.statusLabel = function() {
   const map = {
     'placed': 'Order Placed',

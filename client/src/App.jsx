@@ -20,12 +20,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/menu" replace />} />
             
-            {/* Public Routes */}
             <Route path="/menu" element={<MenuPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             
-            {/* Customer Routes */}
             <Route path="/cart" element={
               <ProtectedRoute>
                 <CartPage />
@@ -42,7 +40,6 @@ function App() {
               </ProtectedRoute>
             } />
 
-            {/* Admin Routes */}
             <Route path="/admin/menu" element={
               <ProtectedRoute adminOnly={true}>
                 <AdminMenuPage />
