@@ -5,11 +5,9 @@ const AdminMenuPage = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   
-  // Modal state
   const [showModal, setShowModal] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   
-  // Form State
   const [formData, setFormData] = useState({
     name: '',
     price: '',
